@@ -16,7 +16,7 @@ namespace KSPShaderTools
         private WaitForSeconds coroutineYield;//don't create a new one every frame..
         private bool coroutineRunning = false;//just tracks if co-routing was created
 
-        [KSPEvent(guiName ="Open Recoloring GUI", guiActive = false, guiActiveEditor = true)]
+        [KSPEvent(guiName ="打开着色器界面", guiActive = false, guiActiveEditor = true)]//Open Recoloring GUI
         public void recolorGUIEvent()
         {
             bool open = true;
@@ -75,7 +75,7 @@ namespace KSPShaderTools
 
         public override string GetInfo()
         {
-            return "This part has configurable colors.";
+            return "该部件可自定义颜色"; // This part has configurable colors.
         }
 
         public override void OnStart(StartState state)

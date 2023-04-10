@@ -209,7 +209,7 @@ namespace KSPShaderTools
                 style.wordWrap = false;
                 nonWrappingLabelStyle = style;
             }
-            windowRect = GUI.Window(id, windowRect, drawWindow, "Part Recoloring");
+            windowRect = GUI.Window(id, windowRect, drawWindow, "部件重新着色"); // Part Recoloring
             windowX = windowRect.x;
             windowY = windowRect.y;
         }
@@ -227,7 +227,7 @@ namespace KSPShaderTools
             drawSectionSelectionArea();
             drawSectionRecoloringArea();
             drawPresetColorArea();
-            if (GUILayout.Button("Close"))
+            if (GUILayout.Button("关闭")) // Close
             {
                 guiCloseAction();//call the method in SSTULauncher to close this GUI
             }
@@ -268,13 +268,13 @@ namespace KSPShaderTools
             float buttonWidth = 70;
             float scrollWidth = 40;
             float sectionTitleWidth = graphWidth - scrollWidth - buttonWidth * 3 - scrollWidth;
-            GUILayout.Label("Section", GUILayout.Width(sectionTitleWidth));
+            GUILayout.Label("分段", GUILayout.Width(sectionTitleWidth)); // Section
             GUI.color = colorIndex == 0 ? Color.red : old;
-            GUILayout.Label("Main", GUILayout.Width(buttonWidth));
+            GUILayout.Label("主要", GUILayout.Width(buttonWidth)); // Main
             GUI.color = colorIndex == 1 ? Color.red : old;
-            GUILayout.Label("Second", GUILayout.Width(buttonWidth));
+            GUILayout.Label("次要", GUILayout.Width(buttonWidth)); // Second
             GUI.color = colorIndex == 2 ? Color.red : old;
-            GUILayout.Label("Detail", GUILayout.Width(buttonWidth));
+            GUILayout.Label("局部", GUILayout.Width(buttonWidth)); // Detail
             GUI.color = old;
             GUILayout.EndHorizontal();
             Color guiColor = old;
@@ -303,7 +303,7 @@ namespace KSPShaderTools
                             guiColor = moduleRecolorData[i].sectionData[k].colors[m].color;
                             guiColor.a = 1;
                             GUI.color = guiColor;
-                            if (GUILayout.Button("Recolor", GUILayout.Width(70)))
+                            if (GUILayout.Button("重新着色", GUILayout.Width(70))) // Recolor
                             {
                                 moduleIndex = i;
                                 sectionIndex = k;
@@ -332,15 +332,15 @@ namespace KSPShaderTools
             }
             bool updated = false;
             GUILayout.BeginHorizontal();
-            GUILayout.Label("Editing: ", GUILayout.Width(60));
+            GUILayout.Label("编辑: ", GUILayout.Width(60)); // Editing
             GUILayout.Label(sectionData.sectionName);
-            GUILayout.Label(getSectionLabel(colorIndex) + " Color");
+            GUILayout.Label(getSectionLabel(colorIndex) + "颜色"); // Color
             GUILayout.FlexibleSpace();//to force everything to the left instead of randomly spaced out, while still allowing dynamic length adjustments
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
-            if (drawColorInputLine("Red", ref editingColor.color.r, ref rStr, sectionData.colorSupported(), 255, 1)) { updated = true; }
-            if (GUILayout.Button("Load Pattern", GUILayout.Width(120)))
+            if (drawColorInputLine("红色", ref editingColor.color.r, ref rStr, sectionData.colorSupported(), 255, 1)) { updated = true; } // Red
+            if (GUILayout.Button("载入样板", GUILayout.Width(120))) // Load Pattern
             {
                 sectionData.colors[0] = storedPattern[0];
                 sectionData.colors[1] = storedPattern[1];
@@ -351,8 +351,8 @@ namespace KSPShaderTools
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
-            if (drawColorInputLine("Green", ref editingColor.color.g, ref gStr, sectionData.colorSupported(), 255, 1)) { updated = true; }
-            if (GUILayout.Button("Store Pattern", GUILayout.Width(120)))
+            if (drawColorInputLine("绿色", ref editingColor.color.g, ref gStr, sectionData.colorSupported(), 255, 1)) { updated = true; } // Green
+            if (GUILayout.Button("保存样板", GUILayout.Width(120))) // Store Pattern
             {
                 storedPattern = new RecoloringData[3];
                 storedPattern[0] = sectionData.colors[0];
@@ -362,8 +362,8 @@ namespace KSPShaderTools
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
-            if (drawColorInputLine("Blue", ref editingColor.color.b, ref bStr, sectionData.colorSupported(), 255, 1)) { updated = true; }
-            if (GUILayout.Button("Load Color", GUILayout.Width(120)))
+            if (drawColorInputLine("蓝色", ref editingColor.color.b, ref bStr, sectionData.colorSupported(), 255, 1)) { updated = true; } // Blue
+            if (GUILayout.Button("载入颜色", GUILayout.Width(120))) // Load Color
             {
                 editingColor = storedColor;
                 updated = true;
@@ -371,8 +371,8 @@ namespace KSPShaderTools
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
-            if (drawColorInputLine("Specular", ref editingColor.specular, ref aStr, sectionData.specularSupported(), 255, 1)) { updated = true; }
-            if (GUILayout.Button("Store Color", GUILayout.Width(120)))
+            if (drawColorInputLine("镜面反射", ref editingColor.specular, ref aStr, sectionData.specularSupported(), 255, 1)) { updated = true; } // Specular
+            if (GUILayout.Button("保存颜色", GUILayout.Width(120))) // Store Color
             {
                 storedColor = editingColor;
             }
@@ -381,15 +381,15 @@ namespace KSPShaderTools
             GUILayout.BeginHorizontal();
             if (sectionData.metallicSupported())
             {
-                if (drawColorInputLine("Metallic", ref editingColor.metallic, ref mStr, true, 255, 1)) { updated = true; }
+                if (drawColorInputLine("金属", ref editingColor.metallic, ref mStr, true, 255, 1)) { updated = true; } // Metallic
             }
             else if (sectionData.hardnessSupported())
             {
-                if (drawColorInputLine("Hardness", ref editingColor.metallic, ref mStr, true, 255, 1)) { updated = true; }
+                if (drawColorInputLine("硬物", ref editingColor.metallic, ref mStr, true, 255, 1)) { updated = true; } // Hardness
             }
             else
             {
-                if (drawColorInputLine("Metallic", ref editingColor.metallic, ref mStr, false, 255, 1)) { updated = true; }
+                if (drawColorInputLine("金属", ref editingColor.metallic, ref mStr, false, 255, 1)) { updated = true; } // Metallic
             }
             if (GUILayout.Button("<", GUILayout.Width(20)))
             {
@@ -398,7 +398,7 @@ namespace KSPShaderTools
                 if (groupIndex < 0) { groupIndex = gs.Count-1; }
                 groupName = gs[groupIndex].name;
             }
-            GUILayout.Label("Palette", GUILayout.Width(70));
+            GUILayout.Label("色泽", GUILayout.Width(70)); // Palette
             if (GUILayout.Button(">", GUILayout.Width(20)))
             {
                 groupIndex++;
@@ -409,7 +409,7 @@ namespace KSPShaderTools
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
-            if (drawColorInputLine("Detail %", ref editingColor.detail, ref dStr, true, 100, 5)) { updated = true; }
+            if (drawColorInputLine("细分 %", ref editingColor.detail, ref dStr, true, 100, 5)) { updated = true; } // Detail
             GUILayout.Label(groupName, GUILayout.Width(120));
             GUILayout.EndHorizontal();
 
@@ -426,7 +426,7 @@ namespace KSPShaderTools
             {
                 return;
             }
-            GUILayout.Label("Select a preset color: ");
+            GUILayout.Label("选择预设颜色: "); // Select a preset color
             presetColorScrollPos = GUILayout.BeginScrollView(presetColorScrollPos, false, true);
             bool update = false;
             Color old = GUI.color;
@@ -445,7 +445,7 @@ namespace KSPShaderTools
                 guiColor = presetColors[i].color;
                 guiColor.a = 1f;
                 GUI.color = guiColor;
-                if (GUILayout.Button("Select", GUILayout.Width(55)))
+                if (GUILayout.Button("选择", GUILayout.Width(55))) // Select
                 {
                     editingColor = presetColors[i].getRecoloringData();
                     rStr = (editingColor.color.r * 255f).ToString("F0");
@@ -509,13 +509,13 @@ namespace KSPShaderTools
             switch (index)
             {
                 case 0:
-                    return "Main";
+                    return "主要"; // Main
                 case 1:
-                    return "Secondary";
+                    return "次要"; // Secondary
                 case 2:
-                    return "Detail";
+                    return "局部"; // Detail
                 default:
-                    return "Unknown";
+                    return "Unknown"; // 
             }
         }
 
